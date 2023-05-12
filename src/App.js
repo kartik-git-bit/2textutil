@@ -1,9 +1,15 @@
 import './App.css';
 import React, { useState } from 'react';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from "react-router-dom";
 
 import Navbar from './components/Navbar';
 import Alert from './components/Alert';
 import Textform from './components/Textform';
+import About from './components/About';
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -36,11 +42,24 @@ function App() {
     }, 3000)
   }
   return (
-    <div className="App">
-      <Navbar alert={alert} mode={mode} modes={modes} />
-      <Alert alert={alert} />
-      <Textform mode={mode} showalert={showalert} title="Enter text belowe" />
-    </div>
+    // <div className="App">
+    //   <Navbar alert={alert} mode={mode} modes={modes} />
+    //   <Alert alert={alert} />
+    //   <Textform mode={mode} showalert={showalert} title="Enter text belowe" />
+    // </div>
+    <Router>
+      <div className='App'>
+        <Navbar alert={alert} mode={mode} modes={modes} />
+        <Alert alert={alert} />
+
+        <Routes>
+          <Route path="/Textform" element={<Textform mode={mode} showalert={showalert} title="Enter text belowe" />}>
+          </Route>
+          <Route exact path='/About' element={<About mode={mode} />}></Route>
+        </Routes>
+
+      </div>
+    </Router>
   );
 }
 
